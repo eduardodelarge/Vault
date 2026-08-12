@@ -1,0 +1,277 @@
+.bootstrap-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  color: var(--text);
+}
+
+/* Navbar */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-links a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.navbar-links a:hover {
+  color: var(--accent);
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.link-button:hover {
+  color: var(--accent);
+}
+
+/* Layout generico de pagina */
+
+.page {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+/* Botoes */
+
+button,
+.button-primary,
+.button-secondary,
+.button-danger {
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button[type='submit'],
+.button-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+button[type='submit']:hover,
+.button-primary:hover {
+  background: var(--accent-hover);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button-secondary {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.button-danger {
+  background: transparent;
+  border-color: var(--danger);
+  color: var(--danger);
+  margin-left: auto;
+}
+
+/* Formularios */
+
+.auth-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-form h1 {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+label,
+.note-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+input,
+textarea {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.form-error {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.form-success {
+  background: var(--success-bg);
+  color: var(--success);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+/* Busca e grid de notas */
+
+.search-bar {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.note-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.note-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  text-decoration: none;
+  color: var(--text-h);
+  background: var(--bg-subtle);
+}
+
+.note-card:hover {
+  border-color: var(--accent);
+}
+
+.note-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.note-card-date {
+  font-size: 12px;
+  color: var(--text);
+}
+
+.empty-state {
+  color: var(--text);
+  padding: 32px 0;
+  text-align: center;
+}
+
+/* Editor de nota */
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.note-form textarea {
+  resize: vertical;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.note-form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Conta */
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.account-info > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.account-info .label {
+  color: var(--text);
+  font-size: 14px;
+}

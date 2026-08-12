@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--
+      Log em JSON estruturado no stdout, jogado fora por padrao, ja pensando na Fase 6:
+      o Datadog Agent (ou qualquer log shipper) le stdout dos containers e faz parsing
+      de JSON automaticamente. O campo "traceId" vem do CorrelationIdFilter (MDC) e
+      correlaciona uma linha de log com o traceId devolvido ao cliente em erros da API.
+    -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <includeMdcKeyName>traceId</includeMdcKeyName>
+            <customFields>{"service":"vaultdesk-backend"}</customFields>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <logger name="com.vaultdesk.backend" level="INFO"/>
+</configuration>

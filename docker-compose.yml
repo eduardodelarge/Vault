@@ -1,0 +1,57 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vaultdesk-postgres
+    environment:
+      POSTGRES_DB: vaultdesk
+      POSTGRES_USER: vaultdesk
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - vaultdesk-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vaultdesk -d vaultdesk"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks: [vaultdesk-net]
+
+  backend:
+    build: ./backend
+    container_name: vaultdesk-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/vaultdesk
+      SPRING_DATASOURCE_USERNAME: vaultdesk
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      VAULTDESK_JWT_SECRET: ${VAULTDESK_JWT_SECRET}
+      VAULTDESK_MASTER_KEY: ${VAULTDESK_MASTER_KEY}
+      # Descomente para anexar o Datadog Java APM Agent (ver secao "Observabilidade" do README):
+      # JAVA_TOOL_OPTIONS: "-javaagent:/dd-java-agent.jar"
+      # DD_API_KEY: ${DD_API_KEY}
+      # DD_ENV: local
+      # DD_SERVICE: vaultdesk-backend
+      # DD_VERSION: 0.0.1
+    ports:
+      # host 8000 -> container 8080: porta 8080 do host colide com a faixa
+      # dinamica que o Windows/Hyper-V reserva (8071-8170) quando roda via WSL2
+      - "8000:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [vaultdesk-net]
+
+  frontend:
+    build: ./frontend
+    container_name: vaultdesk-frontend
+    ports:
+      - "3000:80"
+    depends_on: [backend]
+    networks: [vaultdesk-net]
+
+volumes:
+  vaultdesk-postgres-data:
+
+networks:
+  vaultdesk-net:
+    driver: bridge
