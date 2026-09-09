@@ -22,8 +22,6 @@ cp .env.example .env
 openssl rand -base64 32
 ```
 
-`.env` nunca deve ser commitado (já está no `.gitignore`).
-
 ## Rodando localmente
 
 **Stack completa (produção-like):**
@@ -34,9 +32,7 @@ docker compose up --build
 # frontend: http://localhost:3000
 ```
 
-> Nota: o backend expõe a porta **8000** no host (não 8080) porque, rodando via WSL2, o Windows/Hyper-V costuma reservar dinamicamente a faixa 8071-8170 para si (`netsh interface ipv4 show excludedportrange protocol=tcp`), o que impede o Docker Desktop de publicar a porta 8080. Dentro da rede Docker o container continua ouvindo em 8080 normalmente.
-
-**Dev do frontend com hot-reload** (recomendado durante desenvolvimento):
+**Dev do frontend com hot-reload**:
 
 ```bash
 docker compose up -d postgres backend
